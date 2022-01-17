@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCollections", "TurboCollections\TurboCollections.csproj", "{2A6C63A4-7AFB-4819-9AD3-049302ED2447}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement", "CustomerManagement\CustomerManagement.csproj", "{64644C5E-B06C-42B1-97E0-53D61114B610}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{2A6C63A4-7AFB-4819-9AD3-049302ED2447}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A6C63A4-7AFB-4819-9AD3-049302ED2447}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A6C63A4-7AFB-4819-9AD3-049302ED2447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64644C5E-B06C-42B1-97E0-53D61114B610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64644C5E-B06C-42B1-97E0-53D61114B610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64644C5E-B06C-42B1-97E0-53D61114B610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64644C5E-B06C-42B1-97E0-53D61114B610}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
