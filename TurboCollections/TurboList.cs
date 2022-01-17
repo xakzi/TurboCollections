@@ -2,7 +2,7 @@
 
 namespace TurboCollections
 {
-    public class TurboList
+    public class TurboList<T>
     {
     }
 }
