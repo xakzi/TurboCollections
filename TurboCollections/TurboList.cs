@@ -5,22 +5,33 @@ namespace TurboCollections
 {
     public class TurboList<T>
     {
-        public int Count => items.Length;
+        public int Count { get; private set; }
         private T[] items = Array.Empty<T>();
-        public TurboList()
-        {
-            Console.WriteLine("Hello, Turbo!");
-        }
         public void Add(T item)
         {
-            //Resize Array, new Array, get counts, put new array to our "List"
-            T[] newArray = new T[Count + 1];
+            EnsureSize(Count + 1);
+            items[Count++] = item;
+        }
+        /// <summary>
+        /// This method ensures that the array is at least 'size' big
+        /// </summary>
+        /// <param name="size">The size that your array should have</param>
+        void EnsureSize(int size)
+        {
+            //if the array is large enough, return
+            if (items.Length >= size)
+                return;
+
+            //double the array size, or set it to given size if doubling is not enough
+            int newSize = Math.Max(size, items.Length * 2);
+            
+            //create new array 
+            T[] newArray = new T[newSize];
             for (int i = 0; i < Count; i++)
-            {
+            {//copy old items
                 newArray[i] = items[i];
             }
-
-            newArray[Count] = item;
+            //assign new array
             items = newArray;
         }
         public T Get(int index)
@@ -96,6 +107,15 @@ namespace TurboCollections
         {
             using var enumerator = items.GetEnumerator();
             while (enumerator.MoveNext()) Add(enumerator.Current);
+        }
+        public void Set(int index, T item)
+        {
+            if (index >= Count)
+            {
+                EnsureSize(index+1);
+                Count = index + 1;
+            }
+            items[index] = item;
         }
     }
 }

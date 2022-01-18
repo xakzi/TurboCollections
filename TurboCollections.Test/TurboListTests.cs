@@ -40,11 +40,94 @@ namespace TurboCollections.Test
         }
 
         [Test]
+        public void AnAddedElementCanBeGotten()
+        {
+            int[] numbers = { 5, 7, -12, 9, 3, -4, 104, 12 };
+            var list = new TurboList<int>();
+            foreach (var number in numbers)
+            {
+                list.Add(number);
+            }
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Assert.AreEqual(numbers[i], list.Get(i));
+            }
+        }
+        
+        [Test]
+        public void ExistingItemsCanBeOverwrittenBySetting()
+        {
+            int[] numbers = { 5, 7, -12, 9, 3, -4, 104, 12 };
+            var list = new TurboList<int>();
+            foreach (var number in numbers)
+            {
+                list.Add(number);
+            }
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Assert.AreEqual(numbers[i], list.Get(i));
+            }
+        }
+
+        [TestCase(666)]
+        public void ExistingItemsCanBeOverwrittenBySetting2(int item)
+        {
+            var (_, list) = CreateTestData();
+            list.Set(2, item);
+            Assert.AreEqual(item,list.Get(2));
+        }
+        
+        [Test]
+        public void CanBeExtendedBySetting()
+        {
+            const int setIndex = 100;
+            var (_, list) = CreateTestData();
+            list.Set(setIndex, 666);
+            Assert.AreEqual(setIndex+1,list.Count);
+            Assert.AreEqual(666,list.Get(setIndex));
+        }
+        
+        [Test]
+        public void ExtendingthroughSettingPersistsOldValues()
+        {
+            const int setIndex = 100;
+            var (numbers, list) = CreateTestData();
+            list.Set(setIndex, 666);
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Assert.AreEqual(numbers[i],list.Get(i));
+            }
+        }
+        
+        
+
+        [Test]
+        public void MultipleAddedElementCanBeGotten()
+        {
+            var (numbers , list) = CreateTestData();
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Assert.AreEqual(numbers[i], list.Get(i));
+            }
+        }
+
+        [Test]
         public void RemoveAllElements()
         {
             var list = new TurboList<int>();
             list.Clear();
             Assert.AreEqual(0, list.Count);
+        }
+        (int[]numbers, TurboList<int>) CreateTestData()
+        {
+            int[] numbers = { 5, 7, -12, 9, 3, -4, 104, 12 };
+            var list = new TurboList<int>();
+            foreach (var number in numbers)
+            {
+                list.Add(number);
+            }
+
+            return (numbers, list);
         }
 
         [Test]
@@ -56,7 +139,7 @@ namespace TurboCollections.Test
             list.Add(2);
             list.Add(6);
             list.RemoveAt(1);
-            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual(3, list.Count);
         }
 
         [Test]
@@ -105,18 +188,18 @@ namespace TurboCollections.Test
             list.Add(10);
             list.Add(7);
             list.Remove(53);
-            Assert.AreEqual(4, list.Count);
+            Assert.AreEqual(5, list.Count);
         }
 
         [Test]
         public void AddARangeOfItems()
         {
-            IEnumerable<int> itemsToAdd = new[] {24, 4, 53};
+            IEnumerable<int> items = new[] {24, 4, 53};
             var list = new TurboList<int>();
             list.Add(10);
             list.Add(7);
             list.Add(1);
-            list.AddRange(itemsToAdd);
+            list.AddRange(items);
             
             Assert.AreEqual(6, list.Count);
         }
@@ -124,15 +207,14 @@ namespace TurboCollections.Test
         [Test]
         public void AddRangeSingleShouldWork()
         {
-            IEnumerable<int> itemsToAdd = new[] {666};
+            IEnumerable<int> items = new[] {666};
             var list = new TurboList<int>();
             list.Add(3);
             list.Add(2);
             list.Add(1);
-            list.AddRange(itemsToAdd);
+            list.AddRange(items);
             
             Assert.AreEqual(4, list.Count);
-            Assert.IsTrue(list.Contains(666));
         }
     }
 }
