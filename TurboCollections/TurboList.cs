@@ -87,7 +87,7 @@ namespace TurboCollections
                 }
                 else
                 {
-                    temp++; 
+                    temp++;
                 }
             }
         }
