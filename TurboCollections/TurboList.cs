@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TurboCollections
 {
@@ -90,6 +91,11 @@ namespace TurboCollections
                     temp++;
                 }
             }
+        }
+        public void AddRange(IEnumerable<T> items)
+        {
+            using var enumerator = items.GetEnumerator();
+            while (enumerator.MoveNext()) Add(enumerator.Current);
         }
     }
 }

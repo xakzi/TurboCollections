@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace TurboCollections.Test
@@ -105,6 +106,33 @@ namespace TurboCollections.Test
             list.Add(7);
             list.Remove(53);
             Assert.AreEqual(4, list.Count);
+        }
+
+        [Test]
+        public void AddARangeOfItems()
+        {
+            IEnumerable<int> itemsToAdd = new[] {24, 4, 53};
+            var list = new TurboList<int>();
+            list.Add(10);
+            list.Add(7);
+            list.Add(1);
+            list.AddRange(itemsToAdd);
+            
+            Assert.AreEqual(6, list.Count);
+        }
+        
+        [Test]
+        public void AddRangeSingleShouldWork()
+        {
+            IEnumerable<int> itemsToAdd = new[] {666};
+            var list = new TurboList<int>();
+            list.Add(3);
+            list.Add(2);
+            list.Add(1);
+            list.AddRange(itemsToAdd);
+            
+            Assert.AreEqual(4, list.Count);
+            Assert.IsTrue(list.Contains(666));
         }
     }
 }
