@@ -8,7 +8,13 @@ namespace CustomerManagement
     {
         static void Main(string[] args)
         {
-            var list = new TurboList<int>();
+            var list = new TurboList<float>();
+            list.Add(3f);
+            list.Add(-7);
+            list.Add(1337f);
+            list.Add(1337f);
+            list.RemoveAt(1);
+            
             bool switchstatement = true;
             do
             {

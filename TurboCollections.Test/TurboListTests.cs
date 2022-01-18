@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -78,28 +79,12 @@ namespace TurboCollections.Test
         }
         
         [Test]
-        public void CanBeExtendedBySetting()
+        public void CanNotBeExtendedBySetting()
         {
             const int setIndex = 100;
             var (_, list) = CreateTestData();
-            list.Set(setIndex, 666);
-            Assert.AreEqual(setIndex+1,list.Count);
-            Assert.AreEqual(666,list.Get(setIndex));
+            Assert.Throws<IndexOutOfRangeException>(() => list.Set(setIndex, 666));
         }
-        
-        [Test]
-        public void ExtendingthroughSettingPersistsOldValues()
-        {
-            const int setIndex = 100;
-            var (numbers, list) = CreateTestData();
-            list.Set(setIndex, 666);
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                Assert.AreEqual(numbers[i],list.Get(i));
-            }
-        }
-        
-        
 
         [Test]
         public void MultipleAddedElementCanBeGotten()
@@ -112,11 +97,40 @@ namespace TurboCollections.Test
         }
 
         [Test]
-        public void RemoveAllElements()
+        public void IsEmptyAfterClearing()
         {
-            var list = new TurboList<int>();
+            /*var list = new TurboList<int>();
             list.Clear();
-            Assert.AreEqual(0, list.Count);
+            Assert.AreEqual(0, list.Count);*/
+
+            //mark edits
+            var (_, list) = CreateTestData();
+            list.Clear();
+            Assert.Zero(list.Count);
+        }
+
+        [Test]
+        public void FirstItemIsAddedAtIndexZeroAfterClearing()
+        {
+            var (_, list) = CreateTestData();
+            list.Clear();
+            list.Add(5);
+            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(5, list.Get(0));
+        }
+        
+        [Test]
+        public void ItemsAreClearedWhenClearing()
+        {
+            //given
+            var (_numbers, list) = CreateTestData();
+            //when
+            list.Clear();
+            //then
+            for (int i = 0; i < _numbers.Length; i++)
+            {
+                Assert.Zero(list.Get(i));
+            }
         }
         (int[]numbers, TurboList<int>) CreateTestData()
         {
@@ -139,7 +153,27 @@ namespace TurboCollections.Test
             list.Add(2);
             list.Add(6);
             list.RemoveAt(1);
-            Assert.AreEqual(3, list.Count);
+            Assert.AreEqual(2, list.Count);
+        }
+
+        [Test]
+        public void CountIsReducesWhenRemovingAt()
+        {
+            var (_numbers, list) = CreateTestData();
+            list.RemoveAt(2);
+            Assert.AreEqual(_numbers.Length-1, list.Count);
+        }
+        
+        [Test]
+        public void ItemsAreMovedForwardWhenRemovingAt()
+        {
+            var (_numbers, list) = CreateTestData();
+            list.RemoveAt(2);
+            for (int i = 2; i < _numbers.Length-1; i++)
+            {
+                Assert.AreEqual(_numbers[i+1], list.Get(i), $"Wrong item at index {i}");
+            }
+            
         }
 
         [Test]
@@ -163,7 +197,7 @@ namespace TurboCollections.Test
             list.Add(53);
             list.Add(10);
             list.Add(7);
-            Assert.False(list.Contains(5));
+            Assert.True(list.Contains(5));
         }
 
         [Test]
@@ -175,7 +209,7 @@ namespace TurboCollections.Test
             list.Add(53);
             list.Add(10);
             list.Add(7);
-            Assert.AreEqual(1,list.IndexOf(4));
+            Assert.AreEqual(0,list.IndexOf(4));
         }
 
         [Test]
@@ -188,7 +222,7 @@ namespace TurboCollections.Test
             list.Add(10);
             list.Add(7);
             list.Remove(53);
-            Assert.AreEqual(5, list.Count);
+            Assert.AreEqual(4, list.Count);
         }
 
         [Test]
