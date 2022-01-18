@@ -53,7 +53,7 @@ namespace TurboCollections
         }
         public int IndexOf(T item)
         {
-            var temp = 0; 
+            var temp = 0;
             foreach (var elements in items)
             {
                 if (elements.Equals(item))
