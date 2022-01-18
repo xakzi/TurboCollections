@@ -33,8 +33,10 @@ namespace TurboCollections
         public void RemoveAt(int index)
         {
             T[] newArray = new T[Count - 1];
-            for (int i = 0; i < Count; i++){
-                if (i == index){
+            for (int i = 0; i < Count; i++)
+            {
+                if (i == index)
+                {
                     break;
                 }
                 newArray[i] = items[i];
@@ -45,8 +47,8 @@ namespace TurboCollections
         {
             foreach (var elements in items)
             {
-                if(elements.Equals(item))
-                return true;
+                if (elements.Equals(item))
+                    return true;
             }
 
             return false;
@@ -57,13 +59,37 @@ namespace TurboCollections
             foreach (var elements in items)
             {
                 if (elements.Equals(item))
-                return temp;
+                    return temp;
                 else
                 {
                     temp++;
                 }
             }
             return -1;
+        }
+        public void Remove(T item)
+        {
+            var temp = 0;
+            foreach (var elements in items)
+            {
+                if (elements.Equals(item))
+                {
+                    T[] newArray = new T[Count - 1];
+                    for (int i = 0; i < Count; i++)
+                    {
+                        if (i == temp)
+                        {
+                            break;
+                        }
+                        newArray[i] = items[i];
+                    }
+                    items = newArray;
+                }
+                else
+                {
+                    temp++;
+                }
+            }
         }
     }
 }
