@@ -5,20 +5,19 @@ namespace TurboCollections
 
     public class TurboStack<T> : ITurboStack<T>
     {
-        private T[] items = System.Array.Empty<T>();
-        public int Count { get; private set; }
+        
+        public int Count => items.Count;
         public void Push(T item)
         {
-            CollectionUtil.EnsureSize(ref items, Count+1);
-            items[Count++] = item;
+            items.Add(item);
         }
         public T Peek()
         {
-            return items[Count - 1];
+            return items.Get(Count - 1);
         }
         public T Pop()
         {
-            var result = items[--Count];
+            var result = Peek();
             items[Count] = default;
             return result;
         }
