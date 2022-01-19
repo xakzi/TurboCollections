@@ -5,7 +5,7 @@ namespace TurboCollections
 
     public class TurboStack<T> : ITurboStack<T>
     {
-        
+        private TurboList<T> items = new();
         public int Count => items.Count;
         public void Push(T item)
         {
@@ -18,7 +18,7 @@ namespace TurboCollections
         public T Pop()
         {
             var result = Peek();
-            items[Count] = default;
+            items.RemoveAt(items.Count - 1);
             return result;
         }
     }
