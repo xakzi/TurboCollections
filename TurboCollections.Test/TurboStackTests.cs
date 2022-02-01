@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.IO.Enumeration;
 using NUnit.Framework;
 
 namespace TurboCollections.Test
@@ -20,13 +18,13 @@ namespace TurboCollections.Test
             {
                 return new TurboStack<int>();
             }
-
+            
             [Test]
             public void ItHasACountOfZero()
             {
                 Assert.Zero(Give().Count);
             }
-
+            
             public class WhenPushing
             {
                 private static TurboStack<int> GiveAndPush(int count)
@@ -90,7 +88,9 @@ namespace TurboCollections.Test
 
             public class WhenPopping
             {
-                [TestCase(1),TestCase(7),TestCase(999)]
+                [TestCase(1)]
+                [TestCase(7)]
+                [TestCase(999)]
                 public void ItDecreasesCount(int count)
                 {
                     var stack = Give(count);
@@ -103,22 +103,22 @@ namespace TurboCollections.Test
         [Test]
         public void PassesSmokeTest()
         {
-            var stack = new TurboStack<int>(); //--
+            var stack = new TurboStack<int>(); // --
             Assert.Zero(stack.Count);
             
-            stack.Push(5); //5
+            stack.Push(5); // 5
             Assert.AreEqual(1, stack.Count);
             Assert.AreEqual(5, stack.Peek());
-
-            stack.Push(7);//5-7
-            Assert.AreEqual(7,stack.Pop()); //5
             
-            stack.Push(9); //5-9
-            Assert.AreEqual(2,stack.Count);
-            Assert.AreEqual(9,stack.Pop()); //5
-            Assert.AreEqual(1,stack.Count);
+            stack.Push(7);// 5-7
+            Assert.AreEqual(7, stack.Pop()); // 5
             
-            Assert.AreEqual(5,stack.Pop()); // --
+            stack.Push(9); // 5-9
+            Assert.AreEqual(2, stack.Count);
+            Assert.AreEqual(9, stack.Pop()); // 5
+            Assert.AreEqual(1, stack.Count);
+            
+            Assert.AreEqual(5, stack.Pop()); // --
             Assert.Zero(stack.Count);
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace TurboCollections
+namespace TurboCollections
 {
     public interface ITurboStack<T>
     {

@@ -1,24 +1,25 @@
-﻿using System;
-
 namespace TurboCollections
 {
-
     public class TurboStack<T> : ITurboStack<T>
     {
-        private TurboList<T> items = new();
-        public int Count => items.Count;
+        private T[] items = System.Array.Empty<T>();
+        public int Count { get; private set; }
+
         public void Push(T item)
         {
-            items.Add(item);
+            CollectionUtil.EnsureSize(ref items, Count+1);
+            items[Count++] = item;
         }
+
         public T Peek()
         {
-            return items.Get(Count - 1);
+            return items[Count - 1];
         }
+        
         public T Pop()
         {
-            var result = Peek();
-            items.RemoveAt(items.Count - 1);
+            var result = items[--Count];
+            items[Count] = default;
             return result;
         }
     }
