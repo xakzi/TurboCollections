@@ -18,13 +18,11 @@ namespace TurboCollections
                 swapped = false;
 
                 for (int i = 0; i < endIndex; i++)
-                {
                     if (list.Get(i).CompareTo(list.Get(i + 1)) > 0)
                     {
                         list.Swap(i, i+1);
                         swapped = true;
                     }
-                }
 
                 endIndex--;
             } while (swapped);
@@ -49,14 +47,10 @@ namespace TurboCollections
                 while (true)
                 {
                     while (list.Get(leftPointer) < pivot)
-                    {
                         leftPointer++;
-                    }
 
                     while (rightPointer > 0 && list.Get(rightPointer) > pivot)
-                    {
                         rightPointer--;
-                    }
 
                     if (leftPointer >= rightPointer)
                         break;

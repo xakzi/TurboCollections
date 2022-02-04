@@ -9,10 +9,7 @@ namespace TurboCollections
         public int Count { get; private set; }
         private T[] items = Array.Empty<T>();
 
-        public TurboList()
-        {
-            
-        }
+        public TurboList() { }
         
         public TurboList(int capacity)
         {
@@ -43,9 +40,8 @@ namespace TurboCollections
         public void Clear()
         {
             for (int i = 0; i < Count; i++)
-            {
                 items[i] = default;
-            }
+            
             Count = 0;
         }
 
@@ -81,9 +77,7 @@ namespace TurboCollections
         public void AddRange(IEnumerable<T> items)
         {
             foreach (var item in items)
-            {
                 Add(item);
-            }
         }
 
         public Enumerator GetEnumerator()

@@ -42,9 +42,7 @@ namespace TurboCollections.Test
         {
             var (numbers, list) = CreateTestData();
             for (int i = 0; i < numbers.Length; i++)
-            {
                 Assert.AreEqual(numbers[i], list.Get(i));
-            }
         }
         
         [TestCase(666)]
@@ -96,9 +94,7 @@ namespace TurboCollections.Test
             
                 // then
                 for (int i = 0; i < _numbers.Length; i++)
-                {
                     Assert.Zero(list.Get(i));
-                }
             }
         }
 
